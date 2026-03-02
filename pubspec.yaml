@@ -4,7 +4,7 @@ description: >-
   Auth refresh, smart retry, offline queue, response cache,
   request deduplication, cancel management, upload progress —
   all zero-boilerplate with sealed Result types.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/sagars-sachdev98/dio-network-toolkit
 repository: https://github.com/sagars-sachdev98/dio-network-toolkit
 issue_tracker: https://github.com/sagars-sachdev98/dio-network-toolkit/issues
