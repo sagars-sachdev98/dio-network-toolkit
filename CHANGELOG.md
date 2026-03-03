@@ -1,3 +1,14 @@
+## 1.0.2
+
+- Shorten package description to meet pub.dev conventions
+- Bump `dio` lower bound to `^5.5.0` (fixes `DioMediaType` availability at lower bounds)
+- Bump `connectivity_plus` to `^7.0.0`
+- Bump minimum Dart SDK to `>=3.2.0` and Flutter to `>=3.19.0`
+
+## 1.0.1
+
+- Fix repository URLs in pubspec to match GitHub repo
+
 ## 1.0.0
 
 - Initial release

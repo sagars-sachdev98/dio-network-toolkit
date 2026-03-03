@@ -1,10 +1,9 @@
 name: dio_network_toolkit
 description: >-
-  Production-ready network layer for Flutter & Dart.
-  Auth refresh, smart retry, offline queue, response cache,
-  request deduplication, cancel management, upload progress —
-  all zero-boilerplate with sealed Result types.
-version: 1.0.1
+  Production-ready network layer for Flutter & Dart with auth refresh,
+  smart retry, offline queue, response cache, deduplication, and upload
+  progress using sealed Result types.
+version: 1.0.2
 homepage: https://github.com/sagars-sachdev98/dio-network-toolkit
 repository: https://github.com/sagars-sachdev98/dio-network-toolkit
 issue_tracker: https://github.com/sagars-sachdev98/dio-network-toolkit/issues
@@ -16,12 +15,12 @@ topics:
   - api
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
-  flutter: '>=3.10.0'
+  sdk: '>=3.2.0 <4.0.0'
+  flutter: '>=3.19.0'
 
 dependencies:
-  dio: ^5.4.0
-  connectivity_plus: ^6.0.0
+  dio: ^5.5.0
+  connectivity_plus: ^7.0.0
   flutter:
     sdk: flutter
 
