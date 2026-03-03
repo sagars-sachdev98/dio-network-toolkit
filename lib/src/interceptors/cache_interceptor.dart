@@ -77,7 +77,7 @@ class CacheInterceptor extends Interceptor {
   /// Fires a background network request to update the cache.
   void _revalidate(RequestOptions options) {
     if (_dio == null) return;
-    _dio!.fetch(options).then((response) {
+    _dio.fetch(options).then((response) {
       final key = _key(response.requestOptions);
       _cache[key] = _CacheEntry(response);
       _evictIfNeeded();

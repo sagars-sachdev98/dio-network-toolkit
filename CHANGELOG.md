@@ -1,3 +1,7 @@
+## 1.0.3
+
+- Fix unnecessary non-null assertion warning in `CacheInterceptor`
+
 ## 1.0.2
 
 - Shorten package description to meet pub.dev conventions
