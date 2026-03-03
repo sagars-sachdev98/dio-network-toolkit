@@ -1,8 +1,27 @@
 # dio_network_toolkit
 
+[![pub package](https://img.shields.io/pub/v/dio_network_toolkit.svg)](https://pub.dev/packages/dio_network_toolkit)
+[![pub points](https://img.shields.io/pub/points/dio_network_toolkit)](https://pub.dev/packages/dio_network_toolkit/score)
+[![popularity](https://img.shields.io/pub/popularity/dio_network_toolkit)](https://pub.dev/packages/dio_network_toolkit/score)
+[![likes](https://img.shields.io/pub/likes/dio_network_toolkit)](https://pub.dev/packages/dio_network_toolkit/score)
+[![CI](https://github.com/sagars-sachdev98/dio-network-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/sagars-sachdev98/dio-network-toolkit/actions/workflows/ci.yml)
+[![License: BSD-3](https://img.shields.io/badge/license-BSD--3-blue.svg)](LICENSE)
+
 Production-ready network layer for Flutter & Dart built on top of [Dio](https://pub.dev/packages/dio).
 
 Auth refresh, smart retry, offline queue, response cache, request deduplication, cancel management, upload progress — all zero-boilerplate with sealed `Result` types.
+
+## Why dio_network_toolkit?
+
+| Concern | Raw Dio | dio_network_toolkit |
+|---|---|---|
+| Token refresh + request queuing | ~80 lines of interceptor code | `AuthConfig(tokenProvider: ..., refreshToken: ...)` |
+| Retry with backoff & jitter | Write your own `Interceptor` | `RetryConfig(maxAttempts: 3)` |
+| Offline detection + queue & replay | Manual connectivity checks everywhere | `OfflineQueueConfig(enabled: true)` |
+| Response caching (3 strategies) | Not built-in | `CacheConfig(strategy: CacheStrategy.networkFirst)` |
+| Request deduplication | Not built-in | Automatic for identical in-flight GETs |
+| Error handling | `try/catch` DioException everywhere | Sealed `Result<T>` with pattern matching |
+| Upload with progress | ~20 lines per upload | `api.upload.file(...)` one-liner |
 
 ## Features
 
@@ -22,7 +41,7 @@ Auth refresh, smart retry, offline queue, response cache, request deduplication,
 
 ```yaml
 dependencies:
-  dio_network_toolkit: ^1.0.0
+  dio_network_toolkit: ^1.0.3
 ```
 
 ## Quick Start
@@ -106,5 +125,3 @@ See the [example](example/) for a complete working app.
 ## License
 
 BSD-3-Clause. See [LICENSE](LICENSE).
-# dio-network-toolkit
-# dio-network-toolkit
