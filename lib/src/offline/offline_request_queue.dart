@@ -16,6 +16,8 @@ class OfflineRequestQueue {
   StreamSubscription? _connectivitySub;
   bool _isReplaying = false;
 
+  /// Creates an [OfflineRequestQueue] that listens for connectivity changes
+  /// and replays queued requests when back online.
   OfflineRequestQueue({
     required Dio dio,
     required OfflineQueueConfig config,
@@ -26,7 +28,10 @@ class OfflineRequestQueue {
     _startListening();
   }
 
+  /// Number of requests currently in the queue.
   int get queueLength => _queue.length;
+
+  /// Whether the queue has no pending requests.
   bool get isEmpty => _queue.isEmpty;
 
   /// Add a failed request to the queue for later replay.
@@ -77,6 +82,7 @@ class OfflineRequestQueue {
   /// Clear the queue.
   void clear() => _queue.clear();
 
+  /// Cancels the connectivity subscription and clears the queue.
   void dispose() {
     _connectivitySub?.cancel();
     _queue.clear();

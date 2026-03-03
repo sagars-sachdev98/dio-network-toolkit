@@ -1,26 +1,59 @@
 import 'package:dio/dio.dart';
 
+/// Classification of network errors for handling and display.
 enum NetworkErrorType {
+  /// Device has no internet connection.
   noConnection,
+
+  /// Request timed out (connect, send, or receive).
   timeout,
-  clientError, // 4xx
-  serverError, // 5xx
-  unauthorized, // 401/403
+
+  /// HTTP 4xx client error (excluding 401/403/429).
+  clientError,
+
+  /// HTTP 5xx server error.
+  serverError,
+
+  /// HTTP 401 or 403 — authentication/authorization failure.
+  unauthorized,
+
+  /// Request was cancelled via [CancelToken].
   cancelled,
+
+  /// Response could not be parsed into the expected type.
   parsing,
-  rateLimited, // 429
+
+  /// HTTP 429 — too many requests.
+  rateLimited,
+
+  /// Unclassified error.
   unknown,
 }
 
+/// Structured error from a network request with type, message, and metadata.
 class NetworkError {
+  /// The classified error type.
   final NetworkErrorType type;
+
+  /// Technical error message for logging.
   final String message;
+
+  /// Human-readable message suitable for displaying to users.
   final String? userMessage;
+
+  /// HTTP status code, if available.
   final int? statusCode;
+
+  /// Parsed response body, if available.
   final Map<String, dynamic>? responseBody;
+
+  /// The original error object.
   final dynamic rawError;
+
+  /// Stack trace from parsing errors.
   final StackTrace? stackTrace;
 
+  /// Creates a [NetworkError] with the given properties.
   const NetworkError({
     required this.type,
     required this.message,
@@ -31,6 +64,8 @@ class NetworkError {
     this.stackTrace,
   });
 
+  /// Creates a [NetworkError] from a [DioException], classifying the error type
+  /// and extracting any server-provided message from the response body.
   factory NetworkError.fromDioException(DioException e) {
     final type = _classifyDioException(e);
     Map<String, dynamic>? body;
@@ -56,6 +91,7 @@ class NetworkError {
     );
   }
 
+  /// Creates a [NetworkError] for response parsing failures.
   factory NetworkError.parsing(Object error, StackTrace st) => NetworkError(
         type: NetworkErrorType.parsing,
         message: 'Failed to parse response: $error',
@@ -64,6 +100,7 @@ class NetworkError {
         rawError: error,
       );
 
+  /// Creates a [NetworkError] for no internet connection.
   factory NetworkError.noConnection() => const NetworkError(
         type: NetworkErrorType.noConnection,
         message: 'No internet connection',
@@ -111,7 +148,7 @@ class NetworkError {
           'Something went wrong. Please try again.',
       };
 
-  /// Check if this error is retryable by the user (show retry button)
+  /// Whether this error is retryable by the user (show retry button).
   bool get isRetryable => switch (type) {
         NetworkErrorType.noConnection ||
         NetworkErrorType.timeout ||

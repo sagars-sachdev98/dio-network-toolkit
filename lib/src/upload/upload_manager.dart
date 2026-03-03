@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import '../result/result.dart';
 import '../result/network_error.dart';
 
+/// Callback for tracking upload progress.
 typedef ProgressCallback = void Function(int sent, int total, double percent);
 
 /// Simplified file upload with progress tracking.
@@ -20,9 +21,10 @@ typedef ProgressCallback = void Function(int sent, int total, double percent);
 class UploadManager {
   final Dio _dio;
 
+  /// Creates an [UploadManager] backed by the given [Dio] instance.
   UploadManager(this._dio);
 
-  /// Upload a single file with progress.
+  /// Upload a single file from [filePath] with optional progress tracking.
   Future<Result<T>> file<T>(
     String path, {
     required String filePath,
@@ -61,7 +63,7 @@ class UploadManager {
     }
   }
 
-  /// Upload multiple files.
+  /// Upload multiple files mapped as field name to file path.
   Future<Result<T>> multiFile<T>(
     String path, {
     required Map<String, String> filePaths, // field → path
@@ -93,7 +95,7 @@ class UploadManager {
     }
   }
 
-  /// Upload bytes directly (e.g., camera capture, canvas export).
+  /// Upload raw bytes directly (e.g., camera capture, canvas export).
   Future<Result<T>> bytes<T>(
     String path, {
     required List<int> data,

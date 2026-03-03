@@ -14,6 +14,8 @@ class AuthInterceptor extends QueuedInterceptor {
   final Dio _refreshDio;
   Completer<String?>? _refreshCompleter;
 
+  /// Creates an [AuthInterceptor] with the given [config] and a separate
+  /// [refreshDio] instance used for token refresh to avoid infinite loops.
   AuthInterceptor({required AuthConfig config, required Dio refreshDio})
       : _config = config,
         _refreshDio = refreshDio;

@@ -19,6 +19,8 @@ class CacheInterceptor extends Interceptor {
   final Dio? _dio;
   final _cache = <String, _CacheEntry>{};
 
+  /// Creates a [CacheInterceptor] with the given [config] and optional [dio]
+  /// instance for background revalidation.
   CacheInterceptor({required CacheConfig config, Dio? dio})
       : _config = config,
         _dio = dio;

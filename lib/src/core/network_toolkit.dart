@@ -13,6 +13,7 @@ import '../offline/offline_request_queue.dart';
 import '../upload/upload_manager.dart';
 import 'config.dart';
 
+/// Converts a JSON response into a typed object.
 typedef FromJson<T> = T Function(dynamic json);
 
 /// Production-ready network layer. Create once, inject everywhere.
@@ -36,10 +37,13 @@ class NetworkToolkit {
   late final Dio _refreshDio;
   final NetworkToolkitConfig _config;
 
+  /// File upload manager for single, multi-file, and bytes uploads.
   late final UploadManager upload;
   OfflineRequestQueue? _offlineQueue;
   CacheInterceptor? _cacheInterceptor;
 
+  /// Creates a [NetworkToolkit] with the given [config] and initializes
+  /// all interceptors, the upload manager, and the offline queue.
   NetworkToolkit(this._config) {
     _refreshDio = Dio(BaseOptions(
       baseUrl: _config.baseUrl,
@@ -116,6 +120,7 @@ class NetworkToolkit {
   // HTTP METHODS
   // ═══════════════════════════════════════════════════════════════════════
 
+  /// Sends a GET request and parses the response using [fromJson].
   Future<Result<T>> get<T>(
     String path, {
     required FromJson<T> fromJson,
@@ -135,6 +140,7 @@ class NetworkToolkit {
         fromJson: fromJson,
       );
 
+  /// Sends a GET request and parses the response as a list using [fromJson].
   Future<Result<List<T>>> getList<T>(
     String path, {
     required FromJson<T> fromJson,
@@ -168,6 +174,7 @@ class NetworkToolkit {
         },
       );
 
+  /// Sends a POST request and parses the response using [fromJson].
   Future<Result<T>> post<T>(
     String path, {
     required FromJson<T> fromJson,
@@ -186,6 +193,7 @@ class NetworkToolkit {
         fromJson: fromJson,
       );
 
+  /// Sends a PUT request and parses the response using [fromJson].
   Future<Result<T>> put<T>(
     String path, {
     required FromJson<T> fromJson,
@@ -204,6 +212,7 @@ class NetworkToolkit {
         fromJson: fromJson,
       );
 
+  /// Sends a PATCH request and parses the response using [fromJson].
   Future<Result<T>> patch<T>(
     String path, {
     required FromJson<T> fromJson,
@@ -222,6 +231,7 @@ class NetworkToolkit {
         fromJson: fromJson,
       );
 
+  /// Sends a DELETE request and parses the response using [fromJson].
   Future<Result<T>> delete<T>(
     String path, {
     required FromJson<T> fromJson,
@@ -343,12 +353,14 @@ class NetworkToolkit {
 class NetworkToolkitFactory {
   final Map<String, NetworkToolkit> _instances = {};
 
+  /// Creates toolkit instances from a map of named configurations.
   NetworkToolkitFactory(Map<String, NetworkToolkitConfig> configs) {
     for (final entry in configs.entries) {
       _instances[entry.key] = NetworkToolkit(entry.value);
     }
   }
 
+  /// Returns the toolkit registered with [name], or null if not found.
   NetworkToolkit? operator [](String name) => _instances[name];
 
   /// Get instance or throw if not found.
@@ -360,6 +372,7 @@ class NetworkToolkitFactory {
     return instance;
   }
 
+  /// Disposes all toolkit instances and clears the registry.
   void dispose() {
     for (final instance in _instances.values) {
       instance.dispose();

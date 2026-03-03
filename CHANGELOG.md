@@ -1,3 +1,10 @@
+## 1.0.4
+
+- Add dartdoc comments to all public API members (100% documentation coverage)
+- Add GitHub release, issue templates, CONTRIBUTING.md, and FUNDING.yml
+- Enable GitHub Discussions
+- Update repo description, homepage, and topics on GitHub
+
 ## 1.0.3
 
 - Fix unnecessary non-null assertion warning in `CacheInterceptor`

@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 class PrettyLogInterceptor extends Interceptor {
   final void Function(String)? _logPrint;
 
+  /// Creates a [PrettyLogInterceptor] with an optional custom [logPrint] function.
   PrettyLogInterceptor({void Function(String)? logPrint})
       : _logPrint = logPrint;
 

@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 class ConnectivityInterceptor extends Interceptor {
   final Connectivity _connectivity;
 
+  /// Creates a [ConnectivityInterceptor] with an optional [Connectivity] instance.
   ConnectivityInterceptor({Connectivity? connectivity})
       : _connectivity = connectivity ?? Connectivity();
 
